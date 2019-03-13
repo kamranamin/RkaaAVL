@@ -1,0 +1,149 @@
+﻿@model RkaaAVLS.ViewModels.UserModel
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<style>
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    form {
+        border: 10px solid #f1f1f1;
+       
+    }
+
+
+    input[type=text], input[type=password] {
+        width: 80%;
+        padding: 5px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width:50%;
+    }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+    .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #f44336;
+    }
+
+    .imgcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+    }
+
+  
+
+    .container {
+        padding: 16px;
+    }
+
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+    #wrapper {
+       
+        text-align: center;
+    }
+    #yourdiv {
+       
+        display: inline-block;
+    }
+    .page-header {
+        background-color:grey;
+        text-align: right;
+        color: white;
+        height: 2%;
+    }
+    .footer {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 20px;
+        background-color: #efefef;
+        text-align: center;
+    }
+
+</style>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>ورود</title>
+
+
+</head>
+<body>
+    <div class="page-header bg-danger text-right text-right" >
+       
+        <img src="~/Content/logo.png" style="margin-left:auto;margin-right:auto;display:block;" />
+    </div>
+    <div id="wrapper">
+        <br />
+        <br />
+        <br />
+        <div id="yourdiv">
+            <h2>ورود به سامانه  آرکــا</h2>
+
+
+
+            @Html.ValidationSummary(true)
+            @using (Html.BeginForm())
+            {
+
+                @Html.AntiForgeryToken()
+
+                <div class="container">
+
+                    <div>
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @placeholder = "نام کاربری" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @type = "text" })
+                    </div>
+                    <div>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @placeholder = "رمز عبور" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @type = "password" })
+                    </div>
+
+
+
+                    <button class="btn btn-primary" type="submit">
+                        ورود
+                    </button>
+
+                    @*<label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>*@
+                </div>
+                <div class="footer"><a href="www.Rkaa.ir">Rka</a> <strong>not fixed</strong>.</div>
+
+            }
+
+        </div>
+       
+        
+    </div>
+
+</body>
+</html>

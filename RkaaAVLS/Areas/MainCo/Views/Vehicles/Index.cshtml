@@ -1,0 +1,119 @@
+﻿@model IEnumerable<RkaaAVLS.Models.Entites.Vehicle>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SubOrganization.SubOrganName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vehichtype.TypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imei)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VehicleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VehicleNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SimcardNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DriverName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DriverAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DriverPhoneNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PolicyStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PolicyEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DriverImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegisterDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpireDate)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubOrganization.SubOrganName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vehichtype.TypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imei)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SimcardNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriverName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriverAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriverPhoneNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PolicyStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PolicyEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriverImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegisterDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpireDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.VehicleId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.VehicleId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.VehicleId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
