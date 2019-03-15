@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -16,20 +15,20 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         private DataContext db = new DataContext();
 
         // GET: Admin/SubOrganizations
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             var subOrganizations = db.subOrganizations.Include(s => s.MainOrganization);
-            return View(await subOrganizations.ToListAsync());
+            return View(subOrganizations.ToList());
         }
 
         // GET: Admin/SubOrganizations/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubOrganization subOrganization = await db.subOrganizations.FindAsync(id);
+            SubOrganization subOrganization = db.subOrganizations.Find(id);
             if (subOrganization == null)
             {
                 return HttpNotFound();
@@ -49,12 +48,12 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "SubOrganID,SubOrganName,SubOrgManagerName,SunOrgManagerTel,MainOrganId")] SubOrganization subOrganization)
+        public ActionResult Create([Bind(Include = "SubOrganID,SubOrganName,SubOrgManagerName,SunOrgManagerTel,MainOrganId")] SubOrganization subOrganization)
         {
             if (ModelState.IsValid)
             {
                 db.subOrganizations.Add(subOrganization);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -63,13 +62,13 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         }
 
         // GET: Admin/SubOrganizations/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubOrganization subOrganization = await db.subOrganizations.FindAsync(id);
+            SubOrganization subOrganization = db.subOrganizations.Find(id);
             if (subOrganization == null)
             {
                 return HttpNotFound();
@@ -83,12 +82,12 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "SubOrganID,SubOrganName,SubOrgManagerName,SunOrgManagerTel,MainOrganId")] SubOrganization subOrganization)
+        public ActionResult Edit([Bind(Include = "SubOrganID,SubOrganName,SubOrgManagerName,SunOrgManagerTel,MainOrganId")] SubOrganization subOrganization)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(subOrganization).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.MainOrganId = new SelectList(db.MainOrganizations, "MainOrganID", "MainOrganName", subOrganization.MainOrganId);
@@ -96,13 +95,13 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         }
 
         // GET: Admin/SubOrganizations/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubOrganization subOrganization = await db.subOrganizations.FindAsync(id);
+            SubOrganization subOrganization = db.subOrganizations.Find(id);
             if (subOrganization == null)
             {
                 return HttpNotFound();
@@ -113,11 +112,11 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         // POST: Admin/SubOrganizations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            SubOrganization subOrganization = await db.subOrganizations.FindAsync(id);
+            SubOrganization subOrganization = db.subOrganizations.Find(id);
             db.subOrganizations.Remove(subOrganization);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

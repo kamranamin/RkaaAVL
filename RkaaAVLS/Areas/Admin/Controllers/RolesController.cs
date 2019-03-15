@@ -3,32 +3,31 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RkaaAVLS.Models.Entites;
 
-namespace RkaaAVLS.Areas.Admin
+namespace RkaaAVLS.Areas.Admin.Controllers
 {
     public class RolesController : Controller
     {
         private DataContext db = new DataContext();
 
         // GET: Admin/Roles
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            return View(await db.Role.ToListAsync());
+            return View(db.Role.ToList());
         }
 
         // GET: Admin/Roles/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = await db.Role.FindAsync(id);
+            Role role = db.Role.Find(id);
             if (role == null)
             {
                 return HttpNotFound();
@@ -47,12 +46,12 @@ namespace RkaaAVLS.Areas.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "RoleId,RoleName")] Role role)
+        public ActionResult Create([Bind(Include = "RoleId,RoleName")] Role role)
         {
             if (ModelState.IsValid)
             {
                 db.Role.Add(role);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -60,13 +59,13 @@ namespace RkaaAVLS.Areas.Admin
         }
 
         // GET: Admin/Roles/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = await db.Role.FindAsync(id);
+            Role role = db.Role.Find(id);
             if (role == null)
             {
                 return HttpNotFound();
@@ -79,25 +78,25 @@ namespace RkaaAVLS.Areas.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "RoleId,RoleName")] Role role)
+        public ActionResult Edit([Bind(Include = "RoleId,RoleName")] Role role)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(role).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(role);
         }
 
         // GET: Admin/Roles/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = await db.Role.FindAsync(id);
+            Role role = db.Role.Find(id);
             if (role == null)
             {
                 return HttpNotFound();
@@ -108,11 +107,11 @@ namespace RkaaAVLS.Areas.Admin
         // POST: Admin/Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Role role = await db.Role.FindAsync(id);
+            Role role = db.Role.Find(id);
             db.Role.Remove(role);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

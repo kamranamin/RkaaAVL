@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -16,20 +15,20 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         private DataContext db = new DataContext();
 
         // GET: Admin/Vehicles
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             var vehicles = db.Vehicles.Include(v => v.SubOrganization).Include(v => v.vehichtype);
-            return View(await vehicles.ToListAsync());
+            return View(vehicles.ToList());
         }
 
         // GET: Admin/Vehicles/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = await db.Vehicles.FindAsync(id);
+            Vehicle vehicle = db.Vehicles.Find(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -50,12 +49,12 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "VehicleId,Imei,VehicleName,VehicleNo,SimcardNo,SubOrganID,DriverName,DriverAddress,DriverPhoneNo,PolicyStartDate,PolicyEndDate,DriverImage,RegisterDate,ExpireDate,TypeId")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "VehicleId,Imei,VehicleName,VehicleNo,SimcardNo,SubOrganID,DriverName,DriverAddress,DriverPhoneNo,PolicyStartDate,PolicyEndDate,DriverImage,RegisterDate,ExpireDate,TypeId")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
                 db.Vehicles.Add(vehicle);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,13 +64,13 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         }
 
         // GET: Admin/Vehicles/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = await db.Vehicles.FindAsync(id);
+            Vehicle vehicle = db.Vehicles.Find(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -86,12 +85,12 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "VehicleId,Imei,VehicleName,VehicleNo,SimcardNo,SubOrganID,DriverName,DriverAddress,DriverPhoneNo,PolicyStartDate,PolicyEndDate,DriverImage,RegisterDate,ExpireDate,TypeId")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "VehicleId,Imei,VehicleName,VehicleNo,SimcardNo,SubOrganID,DriverName,DriverAddress,DriverPhoneNo,PolicyStartDate,PolicyEndDate,DriverImage,RegisterDate,ExpireDate,TypeId")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(vehicle).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.SubOrganID = new SelectList(db.subOrganizations, "SubOrganID", "SubOrganName", vehicle.SubOrganID);
@@ -100,13 +99,13 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         }
 
         // GET: Admin/Vehicles/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = await db.Vehicles.FindAsync(id);
+            Vehicle vehicle = db.Vehicles.Find(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -117,11 +116,11 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         // POST: Admin/Vehicles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Vehicle vehicle = await db.Vehicles.FindAsync(id);
+            Vehicle vehicle = db.Vehicles.Find(id);
             db.Vehicles.Remove(vehicle);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

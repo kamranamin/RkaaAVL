@@ -1,144 +1,134 @@
 ﻿@model RkaaAVLS.Models.Entites.Vehicle
 
 @{
-    Layout = null;
+    ViewBag.Title = $"حذف {Model.VehicleName}";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<h3>آیا مطمن هستید؟</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubOrganization.SubOrganName)
+        </dt>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
-</head>
-<body>
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <h4>Vehicle</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.SubOrganization.SubOrganName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.SubOrganization.SubOrganName)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.vehichtype.TypeName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.vehichtype.TypeName)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Imei)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Imei)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.VehicleName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.VehicleName)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.VehicleNo)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.VehicleNo)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.SimcardNo)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.SimcardNo)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.DriverName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.DriverName)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.DriverAddress)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.DriverAddress)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.DriverPhoneNo)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.DriverPhoneNo)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.PolicyStartDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.PolicyStartDate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.PolicyEndDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.PolicyEndDate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.DriverImage)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.DriverImage)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.RegisterDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.RegisterDate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ExpireDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ExpireDate)
-            </dd>
-    
-        </dl>
-    
-        @using (Html.BeginForm()) {
-            @Html.AntiForgeryToken()
-    
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
-            </div>
-        }
-    </div>
-</body>
-</html>
+        <dd>
+            @Html.DisplayFor(model => model.SubOrganization.SubOrganName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vehichtype.TypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vehichtype.TypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Imei)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imei)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SimcardNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SimcardNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverPhoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverPhoneNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PolicyStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PolicyStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PolicyEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PolicyEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisterDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisterDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpireDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            @Html.ActionLink("بازگشت", "Index")
+        </div>
+    }
+</div>

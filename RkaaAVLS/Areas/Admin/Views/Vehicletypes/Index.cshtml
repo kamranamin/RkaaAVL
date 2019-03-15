@@ -1,41 +1,31 @@
 ﻿@model IEnumerable<RkaaAVLS.Models.Entites.Vehicletype>
 
 @{
-    Layout = null;
+    ViewBag.Title = "انواع وسیله نقلیه";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<p>
+    @Html.ActionLink("ایجاد", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeName)
+        </th>
+        <th></th>
+    </tr>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TypeName)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.TypeId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.TypeId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.TypeId })
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeName)
+        </td>
+        <td>
+            @Html.ActionLink("ویرایش", "Edit", new { id=item.TypeId }) |
+            @Html.ActionLink("حذف", "Delete", new { id=item.TypeId })
+        </td>
+    </tr>
+}
+
+</table>

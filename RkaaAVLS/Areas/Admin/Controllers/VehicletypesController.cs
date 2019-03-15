@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -16,19 +15,19 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         private DataContext db = new DataContext();
 
         // GET: Admin/Vehicletypes
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            return View(await db.Vehicletypes.ToListAsync());
+            return View(db.Vehicletypes.ToList());
         }
 
         // GET: Admin/Vehicletypes/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicletype vehicletype = await db.Vehicletypes.FindAsync(id);
+            Vehicletype vehicletype = db.Vehicletypes.Find(id);
             if (vehicletype == null)
             {
                 return HttpNotFound();
@@ -47,12 +46,12 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "TypeId,TypeName")] Vehicletype vehicletype)
+        public ActionResult Create([Bind(Include = "TypeId,TypeName")] Vehicletype vehicletype)
         {
             if (ModelState.IsValid)
             {
                 db.Vehicletypes.Add(vehicletype);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -60,13 +59,13 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         }
 
         // GET: Admin/Vehicletypes/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicletype vehicletype = await db.Vehicletypes.FindAsync(id);
+            Vehicletype vehicletype = db.Vehicletypes.Find(id);
             if (vehicletype == null)
             {
                 return HttpNotFound();
@@ -79,25 +78,25 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "TypeId,TypeName")] Vehicletype vehicletype)
+        public ActionResult Edit([Bind(Include = "TypeId,TypeName")] Vehicletype vehicletype)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(vehicletype).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(vehicletype);
         }
 
         // GET: Admin/Vehicletypes/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicletype vehicletype = await db.Vehicletypes.FindAsync(id);
+            Vehicletype vehicletype = db.Vehicletypes.Find(id);
             if (vehicletype == null)
             {
                 return HttpNotFound();
@@ -108,11 +107,11 @@ namespace RkaaAVLS.Areas.Admin.Controllers
         // POST: Admin/Vehicletypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Vehicletype vehicletype = await db.Vehicletypes.FindAsync(id);
+            Vehicletype vehicletype = db.Vehicletypes.Find(id);
             db.Vehicletypes.Remove(vehicletype);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

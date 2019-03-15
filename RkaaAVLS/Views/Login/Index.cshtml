@@ -97,18 +97,11 @@
 </head>
 <body>
     <div class="page-header bg-danger text-right text-right" >
-       
         <img src="~/Content/logo.png" style="margin-left:auto;margin-right:auto;display:block;" />
     </div>
     <div id="wrapper">
-        <br />
-        <br />
-        <br />
         <div id="yourdiv">
             <h2>ورود به سامانه  آرکــا</h2>
-
-
-
             @Html.ValidationSummary(true)
             @using (Html.BeginForm())
             {
@@ -122,7 +115,7 @@
                         @Html.ValidationMessageFor(model => model.UserName, "", new { @type = "text" })
                     </div>
                     <div>
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @placeholder = "رمز عبور" } })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @type = "password" , @placeholder = "رمز عبور" } })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @type = "password" })
                     </div>
 

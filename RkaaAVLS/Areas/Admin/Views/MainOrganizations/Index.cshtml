@@ -1,53 +1,49 @@
 ﻿@model IEnumerable<RkaaAVLS.Models.Entites.MainOrganization>
 
 @{
-    Layout = null;
+    ViewBag.Title = "سازمان ها";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<p>
+    @Html.ActionLink("ایجاد", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Users.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MainOrganName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MainOrgManagerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MainOrgManagerTel)
+        </th>
+        <th></th>
+    </tr>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MainOrganName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MainOrgManagerName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MainOrgManagerTel)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MainOrganName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MainOrgManagerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MainOrgManagerTel)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.MainOrganID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.MainOrganID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.MainOrganID })
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Users.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MainOrganName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MainOrgManagerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MainOrgManagerTel)
+        </td>
+        <td>
+            @Html.ActionLink("ویرایش", "Edit", new { id=item.MainOrganID }) |
+            @Html.ActionLink("حذف", "Delete", new { id=item.MainOrganID })
+        </td>
+    </tr>
+}
+
+</table>
